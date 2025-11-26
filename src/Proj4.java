@@ -16,12 +16,13 @@ public class Proj4 {
     public static void main(String[] args) throws IOException {
         // Use command line arguments to specify the input file
         if (args.length != 2) {
-            System.err.println("Usage: java TestAvl <input file> <number of lines>");
+            System.err.println("Usage: java Proj4 <input file> <number of lines>");
             System.exit(1);
         }
 
         String inputFileName = args[0];
         int numLines = Integer.parseInt(args[1]);
+        System.out.print("");
 
         // For file input
         FileInputStream inputFileNameStream = null;
@@ -54,13 +55,6 @@ public class Proj4 {
 
         }
 
-        double[] runningTimes = new double[3];
-        ArrayList<ArrayList<DataObj>> sortLists = new ArrayList<>();
-        String[] listTitles = {"Sorted", "Shuffled", "Reversed"};
-
-        //TODO: time the functions
-
-
         //Write to output file
         File file = new File("analysis.txt");
         boolean needsHeader = !file.exists();
@@ -68,21 +62,89 @@ public class Proj4 {
         FileOutputStream analysisFile = new FileOutputStream("analysis.txt", true);
         PrintWriter analysisWriter = new PrintWriter(analysisFile);
 
+        ArrayList<DataObj> currentArray;
+
+        long startTimer;
+        long endTimer;
+
+        /*
+        LISTS OF EACH SORTING TIME
+            0. Shuffled
+            1. Sorted
+            2. Reversed
+        */
+
+        /*
+        NESTED LISTS OF EACH OPERATION
+            0. Insert
+            1. Search
+            2. Delete
+        */
+
+
+        double[][] operateTimes = new double[3][3];
+
         //write results to analysis.txt file in csv format
+        for (int i = 0; i < 3; i++) {
+            SeparateChainingHashTable<DataObj> h = new SeparateChainingHashTable<>();
+            currentArray = chooseArray(arrayData, i);
+
+            for (int j = 0; j < 3; j++) {
+
+                startTimer = System.nanoTime();
+
+                if (j == 0) {
+                    //time insert
+                    for (DataObj dataObj : currentArray) {
+                        h.insert(dataObj);
+                    }
+                }
+                else if (j == 1) {
+                    //time search
+                    for (DataObj dataObj : currentArray) {
+                        boolean searchRes = h.contains(dataObj);
+                    }
+                }
+                else {
+                    //time delete
+                    for (DataObj dataObj : currentArray) {
+                        h.remove(dataObj);
+                    }
+                }
+
+                endTimer = System.nanoTime();
+                operateTimes[i][j] = (endTimer - startTimer) / 1_000_000_000.0;
+            }
+
+
+        }
 
         //check if file is empty, if so add a header
         if (needsHeader) analysisWriter.println(
                 "Lines Read," +
-                        "Sorted Time," +
-                        "Shuffled Time," +
-                        "Reversed Time");
+                        "Sorted Time (Insert)," +
+                        "Sorted Time (Search)," +
+                        "Sorted Time (Delete)," +
+                        "Sorted Time (Insert)," +
+                        "Sorted Time (Insert)," +
+                        "Sorted Time (Delete)," +
+                        "Reversed Time (Insert)" +
+                        "Reversed Time (Insert)" +
+                        "Reversed Time (Delete)");
 
-        analysisWriter.printf("%d,%.9f,%.9f,%d,%d,%d\n",
-                numLines,
-                runningTimes[0],
-                runningTimes[1],
-                runningTimes[2],
-        );
+        analysisWriter.print(numLines + ",");
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                analysisWriter.printf("%.9f",
+                        operateTimes[i][j]
+                );
+                if (j != 2) analysisWriter.print(",");
+            }
+        }
+
+        analysisWriter.println();
+        analysisWriter.flush();
+        analysisWriter.close();
 
     }
 }
