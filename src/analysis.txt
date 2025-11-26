@@ -1,0 +1,3 @@
+Lines Read,Sorted Time (Insert),Sorted Time (Search),Sorted Time (Delete),Sorted Time (Insert),Sorted Time (Insert),Sorted Time (Delete),Reversed Time (Insert)Reversed Time (Insert)Reversed Time (Delete)
+50,0.000055167,0.000050542,0.000062125,0.000024292,0.000033500,0.000054958,0.000022916,0.000029375,0.000046125,
+50,0.000056375,0.000047625,0.0000634580.000024500,0.000034166,0.0000537080.000022875,0.000033542,0.000044583
