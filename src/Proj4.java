@@ -125,11 +125,11 @@ public class Proj4 {
                         "Sorted Time (Insert)," +
                         "Sorted Time (Search)," +
                         "Sorted Time (Delete)," +
-                        "Sorted Time (Insert)," +
-                        "Sorted Time (Insert)," +
-                        "Sorted Time (Delete)," +
-                        "Reversed Time (Insert)" +
-                        "Reversed Time (Insert)" +
+                        "Shuffled Time (Insert)," +
+                        "Shuffled Time (Insert)," +
+                        "Shuffled Time (Delete)," +
+                        "Reversed Time (Insert)," +
+                        "Reversed Time (Search)," +
                         "Reversed Time (Delete)");
 
         analysisWriter.print(numLines + ",");
@@ -140,6 +140,7 @@ public class Proj4 {
                 );
                 if (j != 2) analysisWriter.print(",");
             }
+            if (i != 2) analysisWriter.print(",");
         }
 
         analysisWriter.println();
