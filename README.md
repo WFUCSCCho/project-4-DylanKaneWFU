@@ -82,20 +82,37 @@ it to this repository.
 
 Insertion, search, and deletion running time (already sorted):
 
-![Firefly picture of a cat 86147](https://github.com/user-attachments/assets/8b2d008e-3011-4979-97b8-fa2e9886a01a)
+<img width="605" height="432" alt="Screenshot 2025-12-01 at 17 04 46" src="https://github.com/user-attachments/assets/9c9d8e30-1721-49c4-ad06-5b43cc8138f0" />
 
 
 Insertion, search, and deletion running time (shuffled):
 
+<img width="602" height="437" alt="Screenshot 2025-12-01 at 17 05 20" src="https://github.com/user-attachments/assets/84e073a2-3c55-4aee-a948-2fc3017613ab" />
+
+
 Insertion, search, and deletion running time (reversed):
+
+<img width="603" height="434" alt="Screenshot 2025-12-01 at 17 05 41" src="https://github.com/user-attachments/assets/e4d3212a-3b93-4105-8ad8-915246860e99" />
+
 
 ## 5. **Document your Dataset and Results**
 Document the source of your dataset and any modifications you made to it. Describe the results of your analysis and 
 how it compares to the theoretical performance of the hash table operations.
 
-Dataset Source: // FINISH ME
-Dataset Modifications ("None" if unchanged): // FINISH ME
-Result Analysis: // FINISH ME
+Dataset Source: https://www.kaggle.com/datasets/heitornunes/caffeine-content-of-drinks 
+
+Dataset Modifications ("None" if unchanged):
+
+One datapoint needed to be modified slightly: I changed the "," to an "and" in the drink title for the 125th datapoint. This was due to this data point causing bugs, as data attributes were determined were determined by the split(",") command.
+```
+//Old
+"Coffee (Decaf, Instant)",236.588,6,2,Coffee
+//New
+"Coffee (Decaf and Instant)",236.588,6,2,Coffee
+```
+Result Analysis:
+
+The trendlines for all three lists (sorted, shuffled, and reversed) were very similar. The trendlines for the search and delete operations were nearly flat, indicating a near-constant runtime for these operations. This is in line with the expected Big-Oh runtime for searching and deleting items in Hashsets: O(1). However, the insertion trendlines indicated an exponential growth that is inconsistent with the expected Big Oh runtime of O(1).
 
 ## Submission:
 
