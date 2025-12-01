@@ -96,9 +96,17 @@ Insertion, search, and deletion running time (reversed):
 Document the source of your dataset and any modifications you made to it. Describe the results of your analysis and 
 how it compares to the theoretical performance of the hash table operations.
 
-Dataset Source: // FINISH ME
-Dataset Modifications ("None" if unchanged): // FINISH ME
-Result Analysis: // FINISH ME
+Dataset Source: https://www.kaggle.com/datasets/heitornunes/caffeine-content-of-drinks 
+Dataset Modifications ("None" if unchanged):
+One datapoint needed to be modified slightly: I changed the "," to an "and" in the drink title for the 125th datapoint. This was due to this data point causing bugs, as data attributes were determined were determined by the split(",") command.
+```
+//Old
+"Coffee (Decaf, Instant)",236.588,6,2,Coffee
+//New
+"Coffee (Decaf and Instant)",236.588,6,2,Coffee
+```
+Result Analysis:
+The trendlines for all three lists (sorted, shuffled, and reversed) were very similar. The trendlines for the search and delete operations were nearly flat, indicating a near-constant runtime for these operations. This is in line with the expected Big-Oh runtime for searching and deleting items in Hashsets: O(1). However, the insertion trendlines indicated an exponential growth that is inconsistent with the expected Big Oh runtime of O(1).
 
 ## Submission:
 
